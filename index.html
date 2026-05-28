@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -18,12 +19,17 @@
 
 body{
 
-  font-family:Arial, sans-serif;
+  font-family:
+    "Segoe UI",
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
 
   background:
     linear-gradient(
-      rgba(0,0,0,.75),
-      rgba(0,0,0,.75)
+      rgba(0,0,0,.82),
+      rgba(0,0,0,.82)
     ),
     url('1-fescol-policia-abuso-cilives-1.jpg');
 
@@ -38,32 +44,48 @@ body{
   padding:20px;
 }
 
+/* CONTENEDOR */
+
 .contenedor{
 
-  max-width:900px;
+  max-width:1000px;
 
   margin:auto;
 
-  background:rgba(0,0,0,.80);
+  background:
+    rgba(10,15,25,.78);
 
-  border-radius:15px;
+  backdrop-filter:blur(10px);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  border-radius:20px;
 
   overflow:hidden;
 
-  box-shadow:0 0 20px rgba(0,0,0,.6);
+  box-shadow:
+    0 8px 40px rgba(0,0,0,.7);
 
 }
+
+/* HEADER */
 
 .header{
 
   text-align:center;
 
-  padding:25px;
+  padding:35px 20px;
 
-  background:#0d1b2a;
+  background:
+    linear-gradient(
+      90deg,
+      #0b1320,
+      #132238
+    );
 
-  border-bottom:3px solid #d4af37;
-
+  border-bottom:
+    4px solid #d4af37;
 }
 
 .logo{
@@ -71,51 +93,68 @@ body{
   width:120px;
 
   margin-bottom:15px;
+
+  filter:
+    drop-shadow(0 0 10px rgba(255,255,255,.15));
 }
 
 .header h1{
 
   color:#d4af37;
 
-  font-size:30px;
+  font-size:34px;
+
+  letter-spacing:1px;
 
   margin-bottom:10px;
+
+  text-shadow:
+    0 2px 5px rgba(0,0,0,.5);
 }
 
 .header h2{
 
+  color:#dfe6ee;
+
   font-size:18px;
 
-  color:white;
+  font-weight:400;
 }
+
+/* TABS */
 
 .tabs{
 
   display:flex;
 
-  background:#14213d;
+  background:#111b2d;
 }
 
 .tab{
 
   flex:1;
 
-  padding:15px;
+  padding:18px;
 
   text-align:center;
 
   cursor:pointer;
 
-  border-right:1px solid #2c3e50;
-
   transition:.3s;
 
-  font-weight:bold;
+  font-weight:600;
+
+  border-right:
+    1px solid rgba(255,255,255,.08);
+}
+
+.tab:last-child{
+  border-right:none;
 }
 
 .tab:hover{
 
-  background:#1f3b5b;
+  background:#1f3555;
 }
 
 .tab.activa{
@@ -123,13 +162,17 @@ body{
   background:#d4af37;
 
   color:black;
+
+  font-weight:bold;
 }
+
+/* CONTENIDO */
 
 .contenido{
 
   display:none;
 
-  padding:30px;
+  padding:35px;
 }
 
 .contenido.activo{
@@ -137,20 +180,34 @@ body{
   display:block;
 }
 
+.contenido h2{
+
+  margin-bottom:25px;
+
+  color:#d4af37;
+
+  border-left:
+    5px solid #d4af37;
+
+  padding-left:12px;
+}
+
+/* FORMULARIOS */
+
 .grupo{
 
-  margin-bottom:18px;
+  margin-bottom:20px;
 }
 
 label{
 
   display:block;
 
-  margin-bottom:6px;
+  margin-bottom:8px;
 
-  font-weight:bold;
+  font-weight:600;
 
-  color:#d4af37;
+  color:#f4d35e;
 }
 
 input,
@@ -158,28 +215,64 @@ select{
 
   width:100%;
 
-  padding:12px;
+  padding:14px;
 
-  border:none;
+  border-radius:10px;
 
-  border-radius:5px;
+  border:
+    1px solid rgba(255,255,255,.12);
+
+  background:
+    rgba(255,255,255,.06);
+
+  color:white;
 
   font-size:15px;
+
+  transition:.3s;
 }
+
+input:focus,
+select:focus{
+
+  outline:none;
+
+  border:
+    1px solid #d4af37;
+
+  background:
+    rgba(255,255,255,.10);
+}
+
+input::placeholder{
+
+  color:#c7c7c7;
+}
+
+option{
+  color:black;
+}
+
+/* BOTONES */
 
 button{
 
   width:100%;
 
-  padding:14px;
-
-  background:#d4af37;
-
-  color:black;
+  padding:15px;
 
   border:none;
 
-  border-radius:5px;
+  border-radius:10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #d4af37,
+      #f1c40f
+    );
+
+  color:black;
 
   font-size:16px;
 
@@ -188,63 +281,100 @@ button{
   cursor:pointer;
 
   transition:.3s;
+
+  box-shadow:
+    0 4px 15px rgba(212,175,55,.25);
 }
 
 button:hover{
 
-  background:#f1c40f;
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 6px 20px rgba(212,175,55,.45);
 }
+
+/* RESULTADOS */
 
 #resultado,
 #consultaResultado{
 
-  margin-top:20px;
+  margin-top:25px;
 
-  padding:15px;
+  padding:18px;
 
-  border-radius:5px;
+  border-radius:10px;
 
   display:none;
 
   text-align:center;
 
-  line-height:1.6;
+  line-height:1.8;
+
+  font-size:16px;
 }
 
 .ok{
 
-  background:#14532d;
+  background:
+    rgba(22,101,52,.8);
+
+  border:
+    1px solid #22c55e;
 }
 
 .error{
 
-  background:#7f1d1d;
+  background:
+    rgba(127,29,29,.8);
+
+  border:
+    1px solid #ef4444;
 }
+
+/* QR */
 
 .qr-box{
 
   text-align:center;
 
-  margin-top:20px;
+  margin-top:25px;
 }
 
 .qr-box img{
 
   background:white;
 
-  padding:10px;
+  padding:15px;
 
-  border-radius:10px;
+  border-radius:15px;
+
+  box-shadow:
+    0 0 20px rgba(255,255,255,.15);
 }
 
-@media(max-width:700px){
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+  body{
+    padding:10px;
+  }
 
   .tabs{
     flex-direction:column;
   }
 
   .header h1{
-    font-size:24px;
+    font-size:25px;
+  }
+
+  .header h2{
+    font-size:15px;
+  }
+
+  .contenido{
+    padding:20px;
   }
 
 }
@@ -260,7 +390,7 @@ button:hover{
 <div class="header">
 
 <img
-src="https://upload.wikimedia.org/wikipedia/commons/7/70/Emblem_of_the_National_Police_of_Colombia.svg"
+src="Escudo_Policía_Nacional_de_Colombia.png"
 class="logo"
 >
 
@@ -296,9 +426,7 @@ onclick="mostrarTab('qr', this)">
 <div id="radicacion"
 class="contenido activo">
 
-<h2 style="margin-bottom:25px;">
-Módulo de Radicación
-</h2>
+<h2>Módulo de Radicación</h2>
 
 <div class="grupo">
 <label>Asunto</label>
@@ -410,9 +538,7 @@ Enviar Información
 <div id="consulta"
 class="contenido">
 
-<h2 style="margin-bottom:25px;">
-Consulta de Radicados
-</h2>
+<h2>Consulta de Radicados</h2>
 
 <div class="grupo">
 
@@ -441,9 +567,7 @@ Consultar Radicado
 <div id="qr"
 class="contenido">
 
-<h2 style="margin-bottom:25px;">
-Generador Código QR
-</h2>
+<h2>Generador Código QR</h2>
 
 <div class="grupo">
 
@@ -567,8 +691,6 @@ async function enviar(){
         data.radicado +
         "</strong>";
 
-      // LIMPIAR FORMULARIO
-
       document.getElementById("asunto").value = "";
       document.getElementById("destinatario").value = "";
       document.getElementById("grado").value = "";
@@ -619,7 +741,7 @@ function consultarRadicado(){
   resultado.className = "ok";
 
   resultado.innerHTML =
-    "Consulta solicitada para:<br><strong>" +
+    "🔍 Consulta solicitada para:<br><strong>" +
     radicado +
     "</strong>";
 
@@ -647,3 +769,4 @@ function generarQR(){
 
 </body>
 </html>
+```
