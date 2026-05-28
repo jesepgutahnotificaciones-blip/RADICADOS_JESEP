@@ -619,7 +619,7 @@ await fetch(URL_SCRIPT,{
 method:"POST",
 
 headers:{
-"Content-Type":"application/json"
+"Content-Type":"text/plain"
 },
 
 body:JSON.stringify(datos)
@@ -672,6 +672,8 @@ resultado.innerHTML =
 } catch(error){
 
 console.error(error);
+
+alert(error);
 
 resultado.className =
 "error";
@@ -741,7 +743,7 @@ await fetch(URL_SCRIPT,{
 method:"POST",
 
 headers:{
-"Content-Type":"application/json"
+"Content-Type":"text/plain"
 },
 
 body:JSON.stringify({
@@ -801,6 +803,8 @@ resultado.innerHTML =
 } catch(error){
 
 console.error(error);
+
+alert(error);
 
 resultado.className =
 "error";
