@@ -207,6 +207,8 @@ button:hover{
   display:none;
 
   text-align:center;
+
+  line-height:1.6;
 }
 
 .ok{
@@ -289,7 +291,7 @@ onclick="mostrarTab('qr', this)">
 
 </div>
 
-<!-- MODULO 1 -->
+<!-- MODULO RADICACION -->
 
 <div id="radicacion"
 class="contenido activo">
@@ -327,8 +329,6 @@ Módulo de Radicación
 <label>Correo Dependencia</label>
 <input type="email" id="correo">
 </div>
-
-<!-- NUEVO -->
 
 <div class="grupo">
 
@@ -540,7 +540,7 @@ async function enviar(){
   try {
 
     const response = await fetch(
-      "https://script.google.com/macros/s/AKfycbzRmDGn0yNkQ0hWLatvaf54ZZuJyDW6FycJpmZlonlhSRmhtUlh9WNqReTtD2lOJb1ikw/exec",
+      "https://script.google.com/macros/s/AKfycbxVH7XF7cTms_1D534OfgQTKTBjkxhbLSmNxyYXkawK-xudwoJG1hkYSDPUnfXTAEdx_g/exec",
       {
         method: "POST",
 
@@ -562,17 +562,27 @@ async function enviar(){
       resultado.className = "ok";
 
       resultado.innerHTML =
-        "Información enviada correctamente.<br><br>" +
-        "Radicado generado:<br><strong>" +
+        "✅ Información enviada correctamente.<br><br>" +
+        "📄 Radicado generado:<br><strong>" +
         data.radicado +
         "</strong>";
+
+      // LIMPIAR FORMULARIO
+
+      document.getElementById("asunto").value = "";
+      document.getElementById("destinatario").value = "";
+      document.getElementById("grado").value = "";
+      document.getElementById("nombre").value = "";
+      document.getElementById("telefono").value = "";
+      document.getElementById("correo").value = "";
+      document.getElementById("reviso").value = "";
 
     } else {
 
       resultado.className = "error";
 
       resultado.innerHTML =
-        data.error;
+        "❌ " + data.error;
 
     }
 
@@ -583,7 +593,7 @@ async function enviar(){
     resultado.className = "error";
 
     resultado.innerHTML =
-      error.toString();
+      "❌ Error de conexión.";
 
   }
 
