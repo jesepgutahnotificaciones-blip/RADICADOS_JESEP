@@ -3,98 +3,86 @@
 
 <head>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Formulario de Radicación</title>
+<title>Formulario Radicación</title>
 
-  <style>
+<style>
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
+body{
+  font-family:Arial;
+  background:#f1f3f4;
+  padding:30px;
+}
 
-    body{
-      font-family:Arial, sans-serif;
-      background:#f1f3f4;
-      padding:30px;
-    }
+.contenedor{
+  max-width:550px;
+  margin:auto;
+  background:white;
+  padding:30px;
+  border-radius:10px;
+  box-shadow:0 0 10px rgba(0,0,0,.1);
+}
 
-    .contenedor{
-      max-width:550px;
-      margin:auto;
-      background:white;
-      padding:30px;
-      border-radius:12px;
-      box-shadow:0 0 15px rgba(0,0,0,0.1);
-    }
+h1{
+  text-align:center;
+  color:#1a73e8;
+  margin-bottom:25px;
+}
 
-    h1{
-      text-align:center;
-      margin-bottom:25px;
-      color:#1a73e8;
-    }
+.grupo{
+  margin-bottom:15px;
+}
 
-    .grupo{
-      margin-bottom:15px;
-    }
+label{
+  display:block;
+  margin-bottom:5px;
+  font-weight:bold;
+}
 
-    label{
-      display:block;
-      margin-bottom:5px;
-      font-weight:bold;
-      color:#444;
-    }
+input{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:5px;
+  box-sizing:border-box;
+}
 
-    input{
-      width:100%;
-      padding:12px;
-      border:1px solid #ccc;
-      border-radius:6px;
-      font-size:15px;
-    }
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  background:#1a73e8;
+  color:white;
+  font-size:16px;
+  border-radius:5px;
+  cursor:pointer;
+}
 
-    button{
-      width:100%;
-      padding:14px;
-      border:none;
-      border-radius:6px;
-      background:#1a73e8;
-      color:white;
-      font-size:16px;
-      cursor:pointer;
-      margin-top:10px;
-    }
+button:hover{
+  background:#1558b0;
+}
 
-    button:hover{
-      background:#1558b0;
-    }
+#resultado{
+  margin-top:20px;
+  padding:15px;
+  border-radius:5px;
+  text-align:center;
+  display:none;
+}
 
-    #resultado{
-      margin-top:20px;
-      padding:20px;
-      border-radius:8px;
-      text-align:center;
-      font-size:18px;
-      font-weight:bold;
-      display:none;
-    }
+.ok{
+  background:#e6f4ea;
+  color:#137333;
+}
 
-    .ok{
-      background:#e6f4ea;
-      color:#137333;
-      border:1px solid #b7dfc2;
-    }
+.error{
+  background:#fce8e6;
+  color:#c5221f;
+}
 
-    .error{
-      background:#fce8e6;
-      color:#c5221f;
-      border:1px solid #f4b7b2;
-    }
-
-  </style>
+</style>
 
 </head>
 
@@ -102,45 +90,45 @@
 
 <div class="contenedor">
 
-  <h1>Formulario de Radicación</h1>
+<h1>Formulario de Radicación</h1>
 
-  <div class="grupo">
-    <label>Asunto</label>
-    <input type="text" id="asunto" required>
-  </div>
+<div class="grupo">
+<label>Asunto</label>
+<input type="text" id="asunto">
+</div>
 
-  <div class="grupo">
-    <label>Destinatario</label>
-    <input type="text" id="destinatario" required>
-  </div>
+<div class="grupo">
+<label>Destinatario</label>
+<input type="text" id="destinatario">
+</div>
 
-  <div class="grupo">
-    <label>Grado</label>
-    <input type="text" id="grado">
-  </div>
+<div class="grupo">
+<label>Grado</label>
+<input type="text" id="grado">
+</div>
 
-  <div class="grupo">
-    <label>Nombres de quien Radica</label>
-    <input type="text" id="nombre" required>
-  </div>
+<div class="grupo">
+<label>Nombre quien Radica</label>
+<input type="text" id="nombre">
+</div>
 
-  <div class="grupo">
-    <label>Número Telefónico</label>
-    <input type="text" id="telefono">
-  </div>
+<div class="grupo">
+<label>Número Telefónico</label>
+<input type="text" id="telefono">
+</div>
 
-  <div class="grupo">
-    <label>Correo Dependencia</label>
-    <input type="email" id="correo">
-  </div>
+<div class="grupo">
+<label>Correo Dependencia</label>
+<input type="email" id="correo">
+</div>
 
-  <button id="btnEnviar" onclick="enviar()">
+<button onclick="enviar()" id="btnEnviar">
 
-    Enviar Información
+Enviar Información
 
-  </button>
+</button>
 
-  <div id="resultado"></div>
+<div id="resultado"></div>
 
 </div>
 
@@ -148,88 +136,85 @@
 
 async function enviar(){
 
-  const boton = document.getElementById("btnEnviar");
+  const boton =
+    document.getElementById("btnEnviar");
 
   boton.disabled = true;
-  boton.innerHTML = "Enviando información...";
+  boton.innerHTML = "Enviando...";
 
-  const resultadoDiv = document.getElementById("resultado");
+  const resultado =
+    document.getElementById("resultado");
 
   const datos = {
 
-    asunto: document.getElementById("asunto").value,
-    destinatario: document.getElementById("destinatario").value,
-    grado: document.getElementById("grado").value,
-    nombre: document.getElementById("nombre").value,
-    telefono: document.getElementById("telefono").value,
-    correo: document.getElementById("correo").value
+    asunto:
+      document.getElementById("asunto").value,
+
+    destinatario:
+      document.getElementById("destinatario").value,
+
+    grado:
+      document.getElementById("grado").value,
+
+    nombre:
+      document.getElementById("nombre").value,
+
+    telefono:
+      document.getElementById("telefono").value,
+
+    correo:
+      document.getElementById("correo").value
 
   };
 
   try {
 
-    // REEMPLAZA ESTA URL POR TU WEB APP DE APPS SCRIPT
-    const url =
-      "https://script.google.com/macros/s/AKfycbzRmDGn0yNkQ0hWLatvaf54ZZuJyDW6FycJpmZlonlhSRmhtUlh9WNqReTtD2lOJb1ikw/exec";
+    await fetch(
+      "https://script.google.com/macros/s/AKfycbzRmDGn0yNkQ0hWLatvaf54ZZuJyDW6FycJpmZlonlhSRmhtUlh9WNqReTtD2lOJb1ikw/exec",
+      {
 
-    const respuesta = await fetch(url, {
+        method: "POST",
 
-      method: "POST",
+        mode: "no-cors",
 
-      headers: {
-        "Content-Type": "application/json"
-      },
+        headers: {
+          "Content-Type": "text/plain"
+        },
 
-      body: JSON.stringify(datos)
+        body: JSON.stringify(datos)
 
-    });
+      }
+    );
 
-    const resultado = await respuesta.json();
+    resultado.style.display = "block";
 
-    resultadoDiv.style.display = "block";
+    resultado.className = "ok";
 
-    if(resultado.resultado){
+    resultado.innerHTML =
+      "Información enviada correctamente.";
 
-      resultadoDiv.className = "ok";
+    // LIMPIAR
 
-      resultadoDiv.innerHTML = `
-        Información enviada correctamente<br><br>
-        <strong>Radicado generado:</strong><br>
-        ${resultado.resultado}
-      `;
-
-      // LIMPIAR FORMULARIO
-
-      document.getElementById("asunto").value = "";
-      document.getElementById("destinatario").value = "";
-      document.getElementById("grado").value = "";
-      document.getElementById("nombre").value = "";
-      document.getElementById("telefono").value = "";
-      document.getElementById("correo").value = "";
-
-    } else {
-
-      resultadoDiv.className = "error";
-
-      resultadoDiv.innerHTML =
-        "Error:<br><br>" + resultado.error;
-
-    }
+    document.getElementById("asunto").value = "";
+    document.getElementById("destinatario").value = "";
+    document.getElementById("grado").value = "";
+    document.getElementById("nombre").value = "";
+    document.getElementById("telefono").value = "";
+    document.getElementById("correo").value = "";
 
   } catch(error){
 
-    resultadoDiv.style.display = "block";
+    resultado.style.display = "block";
 
-    resultadoDiv.className = "error";
+    resultado.className = "error";
 
-    resultadoDiv.innerHTML =
-      "Error de conexión con Apps Script";
-
-    console.error(error);
+    resultado.innerHTML =
+      "Error enviando información.";
 
   }
 
   boton.disabled = false;
+
   boton.innerHTML = "Enviar Información";
 
 }
