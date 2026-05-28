@@ -306,8 +306,6 @@ button:hover{
 
   display:none;
 
-  text-align:center;
-
   line-height:1.8;
 
   font-size:16px;
@@ -727,7 +725,7 @@ async function enviar(){
 
 
 
-function consultarRadicado(){
+async function consultarRadicado(){
 
   const radicado =
     document.getElementById("radicadoBuscar").value;
@@ -737,12 +735,72 @@ function consultarRadicado(){
 
   resultado.style.display = "block";
 
-  resultado.className = "ok";
-
   resultado.innerHTML =
-    "🔍 Consulta solicitada para:<br><strong>" +
-    radicado +
-    "</strong>";
+    "Consultando...";
+
+  try {
+
+    const response =
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbxVH7XF7cTms_1D534OfgQTKTBjkxhbLSmNxyYXkawK-xudwoJG1hkYSDPUnfXTAEdx_g/exec?radicado="
+        + encodeURIComponent(radicado)
+      );
+
+    const data =
+      await response.json();
+
+    if(data.success){
+
+      resultado.className = "ok";
+
+      resultado.innerHTML =
+
+        "<strong>📄 INFORMACIÓN DEL RADICADO</strong><br><br>" +
+
+        "<strong>Radicado:</strong> "
+        + data.radicado + "<br><br>" +
+
+        "<strong>Asunto:</strong> "
+        + data.asunto + "<br><br>" +
+
+        "<strong>Destinatario:</strong> "
+        + data.destinatario + "<br><br>" +
+
+        "<strong>Fecha y hora del envío:</strong> "
+        + data.fecha + "<br><br>" +
+
+        "<strong>Nombre quien Radicó:</strong> "
+        + data.nombre + "<br><br>" +
+
+        "<strong>Nro. Telefónico:</strong> "
+        + data.telefono + "<br><br>" +
+
+        "<strong>Correo:</strong> "
+        + data.correo + "<br><br>" +
+
+        "<strong>Quien Revisó:</strong> "
+        + data.reviso + "<br><br>" +
+
+        "<strong>Firmado jefe oficina:</strong> "
+        + data.firmado;
+
+    } else {
+
+      resultado.className = "error";
+
+      resultado.innerHTML =
+        "❌ " + data.error;
+
+    }
+
+  } catch(error){
+
+    resultado.className = "error";
+
+    resultado.innerHTML =
+      "❌ Error consultando radicado.";
+
+  }
 
 }
 
@@ -768,4 +826,3 @@ function generarQR(){
 
 </body>
 </html>
-
