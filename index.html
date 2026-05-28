@@ -6,81 +6,247 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Formulario de Radicación</title>
+<title>Sistema de Radicación - Policía Nacional</title>
 
 <style>
 
-body{
-  font-family:Arial, sans-serif;
-  background:#f1f3f4;
-  padding:30px;
-}
-
-.contenedor{
-  max-width:550px;
-  margin:auto;
-  background:white;
-  padding:30px;
-  border-radius:10px;
-  box-shadow:0 0 10px rgba(0,0,0,.1);
-}
-
-h1{
-  text-align:center;
-  color:#1a73e8;
-  margin-bottom:25px;
-}
-
-.grupo{
-  margin-bottom:15px;
-}
-
-label{
-  display:block;
-  margin-bottom:5px;
-  font-weight:bold;
-}
-
-input{
-  width:100%;
-  padding:12px;
-  border:1px solid #ccc;
-  border-radius:5px;
+*{
+  margin:0;
+  padding:0;
   box-sizing:border-box;
 }
 
-button{
-  width:100%;
-  padding:14px;
-  border:none;
-  background:#1a73e8;
+body{
+
+  font-family:Arial, sans-serif;
+
+  background:
+    linear-gradient(
+      rgba(0,0,0,.75),
+      rgba(0,0,0,.75)
+    ),
+    url('1-fescol-policia-abuso-cilives-1.jpg');
+
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+
+  min-height:100vh;
+
   color:white;
-  font-size:16px;
-  border-radius:5px;
+
+  padding:20px;
+}
+
+.contenedor{
+
+  max-width:900px;
+
+  margin:auto;
+
+  background:rgba(0,0,0,.78);
+
+  border-radius:15px;
+
+  overflow:hidden;
+
+  box-shadow:0 0 20px rgba(0,0,0,.6);
+
+}
+
+.header{
+
+  text-align:center;
+
+  padding:25px;
+
+  background:#0d1b2a;
+
+  border-bottom:3px solid #d4af37;
+
+}
+
+.logo{
+
+  width:120px;
+
+  margin-bottom:15px;
+}
+
+.header h1{
+
+  color:#d4af37;
+
+  font-size:30px;
+
+  margin-bottom:10px;
+}
+
+.header h2{
+
+  font-size:18px;
+
+  color:white;
+}
+
+.tabs{
+
+  display:flex;
+
+  background:#14213d;
+
+}
+
+.tab{
+
+  flex:1;
+
+  padding:15px;
+
+  text-align:center;
+
   cursor:pointer;
+
+  border-right:1px solid #2c3e50;
+
+  transition:.3s;
+
+  font-weight:bold;
+}
+
+.tab:hover{
+
+  background:#1f3b5b;
+}
+
+.tab.activa{
+
+  background:#d4af37;
+
+  color:black;
+}
+
+.contenido{
+
+  display:none;
+
+  padding:30px;
+}
+
+.contenido.activo{
+
+  display:block;
+}
+
+.grupo{
+
+  margin-bottom:18px;
+}
+
+label{
+
+  display:block;
+
+  margin-bottom:6px;
+
+  font-weight:bold;
+
+  color:#d4af37;
+}
+
+input{
+
+  width:100%;
+
+  padding:12px;
+
+  border:none;
+
+  border-radius:5px;
+
+  font-size:15px;
+}
+
+button{
+
+  width:100%;
+
+  padding:14px;
+
+  background:#d4af37;
+
+  color:black;
+
+  border:none;
+
+  border-radius:5px;
+
+  font-size:16px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:.3s;
 }
 
 button:hover{
-  background:#1558b0;
+
+  background:#f1c40f;
 }
 
-#resultado{
+#resultado,
+#consultaResultado{
+
   margin-top:20px;
+
   padding:15px;
+
   border-radius:5px;
-  text-align:center;
+
   display:none;
-  font-size:18px;
+
+  text-align:center;
 }
 
 .ok{
-  background:#e6f4ea;
-  color:#137333;
+
+  background:#14532d;
 }
 
 .error{
-  background:#fce8e6;
-  color:#c5221f;
+
+  background:#7f1d1d;
+}
+
+.qr-box{
+
+  text-align:center;
+
+  margin-top:20px;
+}
+
+.qr-box img{
+
+  background:white;
+
+  padding:10px;
+
+  border-radius:10px;
+}
+
+@media(max-width:700px){
+
+  .tabs{
+
+    flex-direction:column;
+  }
+
+  .header h1{
+
+    font-size:24px;
+  }
+
 }
 
 </style>
@@ -91,7 +257,48 @@ button:hover{
 
 <div class="contenedor">
 
-<h1>Formulario de Radicación</h1>
+<div class="header">
+
+<img
+  src="https://upload.wikimedia.org/wikipedia/commons/7/70/Emblem_of_the_National_Police_of_Colombia.svg"
+  class="logo"
+>
+
+<h1>POLICÍA NACIONAL DE COLOMBIA</h1>
+
+<h2>Sistema Institucional de Radicación</h2>
+
+</div>
+
+<!-- PESTAÑAS -->
+
+<div class="tabs">
+
+<div class="tab activa"
+onclick="mostrarTab('radicacion', this)">
+📄 Radicación
+</div>
+
+<div class="tab"
+onclick="mostrarTab('consulta', this)">
+🔍 Consulta
+</div>
+
+<div class="tab"
+onclick="mostrarTab('qr', this)">
+📱 QR
+</div>
+
+</div>
+
+<!-- MODULO 1 -->
+
+<div id="radicacion"
+class="contenido activo">
+
+<h2 style="margin-bottom:25px;">
+Módulo de Radicación
+</h2>
 
 <div class="grupo">
 <label>Asunto</label>
@@ -133,7 +340,95 @@ Enviar Información
 
 </div>
 
+<!-- MODULO 2 -->
+
+<div id="consulta"
+class="contenido">
+
+<h2 style="margin-bottom:25px;">
+Consulta de Radicados
+</h2>
+
+<div class="grupo">
+
+<label>Número de Radicado</label>
+
+<input
+  type="text"
+  id="radicadoBuscar"
+  placeholder="Ej: RAD-00001"
+>
+
+</div>
+
+<button onclick="consultarRadicado()">
+
+Consultar Radicado
+
+</button>
+
+<div id="consultaResultado"></div>
+
+</div>
+
+<!-- MODULO 3 -->
+
+<div id="qr"
+class="contenido">
+
+<h2 style="margin-bottom:25px;">
+Generador Código QR
+</h2>
+
+<div class="grupo">
+
+<label>Ingrese Radicado</label>
+
+<input
+  type="text"
+  id="textoQR"
+  placeholder="RAD-00001"
+>
+
+</div>
+
+<button onclick="generarQR()">
+
+Generar QR
+
+</button>
+
+<div class="qr-box" id="qrResultado"></div>
+
+</div>
+
+</div>
+
 <script>
+
+function mostrarTab(id, elemento){
+
+  document
+    .querySelectorAll(".contenido")
+    .forEach(c => {
+      c.classList.remove("activo");
+    });
+
+  document
+    .querySelectorAll(".tab")
+    .forEach(t => {
+      t.classList.remove("activa");
+    });
+
+  document
+    .getElementById(id)
+    .classList.add("activo");
+
+  elemento.classList.add("activa");
+
+}
+
+
 
 async function enviar(){
 
@@ -172,7 +467,7 @@ async function enviar(){
   try {
 
     const response = await fetch(
-      "https://script.google.com/macros/s/AKfycbxtfCSaPeaaGMxglyD1oXm7Bvn1GvKnPlLvmXrm72Fp9nj55lBbIMDQCwtQDvDarc54/exec",
+      "https://script.google.com/macros/s/AKfycbzRmDGn0yNkQ0hWLatvaf54ZZuJyDW6FycJpmZlonlhSRmhtUlh9WNqReTtD2lOJb1ikw/exec",
       {
         method: "POST",
 
@@ -199,15 +494,6 @@ async function enviar(){
         data.radicado +
         "</strong>";
 
-      // LIMPIAR FORMULARIO
-
-      document.getElementById("asunto").value = "";
-      document.getElementById("destinatario").value = "";
-      document.getElementById("grado").value = "";
-      document.getElementById("nombre").value = "";
-      document.getElementById("telefono").value = "";
-      document.getElementById("correo").value = "";
-
     } else {
 
       resultado.className = "error";
@@ -232,6 +518,46 @@ async function enviar(){
 
   boton.innerHTML =
     "Enviar Información";
+
+}
+
+
+
+function consultarRadicado(){
+
+  const radicado =
+    document.getElementById("radicadoBuscar").value;
+
+  const resultado =
+    document.getElementById("consultaResultado");
+
+  resultado.style.display = "block";
+
+  resultado.className = "ok";
+
+  resultado.innerHTML =
+    "Consulta solicitada para:<br><strong>" +
+    radicado +
+    "</strong><br><br>" +
+    "Módulo listo para conectar con Apps Script.";
+
+}
+
+
+
+function generarQR(){
+
+  const texto =
+    document.getElementById("textoQR").value;
+
+  const qr =
+    document.getElementById("qrResultado");
+
+  qr.innerHTML =
+
+    "<img src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl="
+    + encodeURIComponent(texto) +
+    "'>";
 
 }
 
