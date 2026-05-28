@@ -27,8 +27,8 @@ body{
 
   background:
     linear-gradient(
-      rgba(0,0,0,.82),
-      rgba(0,0,0,.82)
+      rgba(0,0,0,.85),
+      rgba(0,0,0,.85)
     ),
     url('1-fescol-policia-abuso-cilives-1.jpg');
 
@@ -50,7 +50,7 @@ body{
   margin:auto;
 
   background:
-    rgba(10,15,25,.78);
+    rgba(10,15,25,.82);
 
   backdrop-filter:blur(10px);
 
@@ -63,7 +63,6 @@ body{
 
   box-shadow:
     0 8px 40px rgba(0,0,0,.7);
-
 }
 
 .header{
@@ -138,7 +137,6 @@ body{
 }
 
 .tab:hover{
-
   background:#1f3555;
 }
 
@@ -159,7 +157,6 @@ body{
 }
 
 .contenido.activo{
-
   display:block;
 }
 
@@ -176,7 +173,6 @@ body{
 }
 
 .grupo{
-
   margin-bottom:20px;
 }
 
@@ -248,7 +244,6 @@ button{
 }
 
 button:hover{
-
   transform:translateY(-2px);
 }
 
@@ -746,31 +741,31 @@ async function consultarRadicado(){
         "<strong>📄 INFORMACIÓN DEL RADICADO</strong><br><br>" +
 
         "<strong>Radicado:</strong> "
-        + data.radicado + "<br><br>" +
+        + (data.radicado || "") + "<br><br>" +
 
         "<strong>Asunto:</strong> "
-        + data.asunto + "<br><br>" +
+        + (data.asunto || "") + "<br><br>" +
 
         "<strong>Destinatario:</strong> "
-        + data.destinatario + "<br><br>" +
+        + (data.destinatario || "") + "<br><br>" +
 
         "<strong>Fecha y hora:</strong> "
-        + data.fecha + "<br><br>" +
+        + (data.fecha || "") + "<br><br>" +
 
         "<strong>Nombre quien Radicó:</strong> "
-        + data.nombre + "<br><br>" +
+        + (data.nombre || "") + "<br><br>" +
 
         "<strong>Teléfono:</strong> "
-        + data.telefono + "<br><br>" +
+        + (data.telefono || "") + "<br><br>" +
 
         "<strong>Correo:</strong> "
-        + data.correo + "<br><br>" +
+        + (data.correo || "") + "<br><br>" +
 
         "<strong>Quien Revisó:</strong> "
-        + data.reviso + "<br><br>" +
+        + (data.reviso || "Sin información") + "<br><br>" +
 
         "<strong>Firmado jefe oficina:</strong> "
-        + data.firmado;
+        + (data.firmado || "Sin información");
 
     } else {
 
