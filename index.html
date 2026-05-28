@@ -1,30 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <base target="_top">
 
   <style>
 
     body{
-      font-family: Arial;
-      background:#f4f4f4;
+      font-family:Arial;
+      background:#f1f1f1;
       padding:20px;
     }
 
     .contenedor{
-      background:white;
       max-width:500px;
       margin:auto;
+      background:white;
       padding:25px;
       border-radius:10px;
-      box-shadow:0 0 10px rgba(0,0,0,0.1);
+      box-shadow:0 0 10px rgba(0,0,0,.1);
     }
 
-    h2{
-      text-align:center;
-    }
-
-    input, textarea{
+    input{
       width:100%;
       padding:12px;
       margin-top:10px;
@@ -35,14 +32,14 @@
 
     button{
       width:100%;
-      padding:14px;
       margin-top:15px;
-      border:none;
-      border-radius:5px;
+      padding:14px;
       background:#4285F4;
       color:white;
-      font-size:16px;
+      border:none;
+      border-radius:5px;
       cursor:pointer;
+      font-size:16px;
     }
 
     button:hover{
@@ -52,23 +49,22 @@
     #resultado{
       margin-top:20px;
       padding:15px;
-      background:#e8f0fe;
+      background:#E8F0FE;
       border-radius:5px;
-      text-align:center;
-      font-size:18px;
-      font-weight:bold;
-      color:#1a73e8;
       display:none;
+      text-align:center;
+      font-weight:bold;
     }
 
   </style>
+
 </head>
 
 <body>
 
 <div class="contenedor">
 
-  <h2>Radicación</h2>
+  <h2>Formulario Radicación</h2>
 
   <input type="text" id="asunto" placeholder="Asunto">
 
@@ -76,11 +72,11 @@
 
   <input type="text" id="grado" placeholder="Grado">
 
-  <input type="text" id="nombre" placeholder="Nombres de quien Radica">
+  <input type="text" id="nombre" placeholder="Nombre quien radica">
 
-  <input type="text" id="telefono" placeholder="Número Telefónico">
+  <input type="text" id="telefono" placeholder="Número telefónico">
 
-  <input type="email" id="correo" placeholder="Correo Dependencia">
+  <input type="email" id="correo" placeholder="Correo dependencia">
 
   <button onclick="enviar()">Enviar Información</button>
 
@@ -91,6 +87,11 @@
 <script>
 
 function enviar(){
+
+  const boton = document.querySelector("button");
+
+  boton.disabled = true;
+  boton.innerHTML = "Enviando...";
 
   const datos = {
 
@@ -104,22 +105,28 @@ function enviar(){
   };
 
   google.script.run
-    .withSuccessHandler(function(resultado){
+
+    .withSuccessHandler(function(respuesta){
 
       document.getElementById("resultado").style.display = "block";
 
       document.getElementById("resultado").innerHTML =
-        "Radicado generado:<br><br>" + resultado;
+        "Resultado columna C:<br><br>" + respuesta;
 
-      // LIMPIAR CAMPOS
-      document.getElementById("asunto").value = "";
-      document.getElementById("destinatario").value = "";
-      document.getElementById("grado").value = "";
-      document.getElementById("nombre").value = "";
-      document.getElementById("telefono").value = "";
-      document.getElementById("correo").value = "";
+      boton.disabled = false;
+      boton.innerHTML = "Enviar Información";
 
     })
+
+    .withFailureHandler(function(error){
+
+      alert("Error: " + error.message);
+
+      boton.disabled = false;
+      boton.innerHTML = "Enviar Información";
+
+    })
+
     .guardarDatos(datos);
 
 }
