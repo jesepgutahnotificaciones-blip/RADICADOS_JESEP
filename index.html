@@ -70,6 +70,7 @@ button:hover{
   border-radius:5px;
   text-align:center;
   display:none;
+  font-size:18px;
 }
 
 .ok{
@@ -169,16 +170,16 @@ async function enviar(){
 
   try {
 
-    await fetch(
+    const respuesta = await fetch(
       "https://script.google.com/macros/s/AKfycbzRmDGn0yNkQ0hWLatvaf54ZZuJyDW6FycJpmZlonlhSRmhtUlh9WNqReTtD2lOJb1ikw/exec",
       {
 
         method: "POST",
 
-        mode: "no-cors",
+        mode: "cors",
 
         headers: {
-          "Content-Type": "text/plain"
+          "Content-Type": "application/json"
         },
 
         body: JSON.stringify(datos)
@@ -186,14 +187,19 @@ async function enviar(){
       }
     );
 
+    const data = await respuesta.json();
+
     resultado.style.display = "block";
 
     resultado.className = "ok";
 
     resultado.innerHTML =
-      "Información enviada correctamente.";
+      "Información enviada correctamente.<br><br>" +
+      "Radicado generado:<br><strong>" +
+      data.resultado +
+      "</strong>";
 
-    // LIMPIAR
+    // LIMPIAR FORMULARIO
 
     document.getElementById("asunto").value = "";
     document.getElementById("destinatario").value = "";
@@ -210,6 +216,8 @@ async function enviar(){
 
     resultado.innerHTML =
       "Error enviando información.";
+
+    console.error(error);
 
   }
 
