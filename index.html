@@ -141,6 +141,7 @@ async function enviar(){
     document.getElementById("btnEnviar");
 
   boton.disabled = true;
+
   boton.innerHTML = "Enviando...";
 
   const resultado =
@@ -170,16 +171,16 @@ async function enviar(){
 
   try {
 
-    const respuesta = await fetch(
+    await fetch(
       "https://script.google.com/macros/s/AKfycbzRmDGn0yNkQ0hWLatvaf54ZZuJyDW6FycJpmZlonlhSRmhtUlh9WNqReTtD2lOJb1ikw/exec",
       {
 
         method: "POST",
 
-        mode: "cors",
+        mode: "no-cors",
 
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "text/plain"
         },
 
         body: JSON.stringify(datos)
@@ -187,19 +188,14 @@ async function enviar(){
       }
     );
 
-    const data = await respuesta.json();
-
     resultado.style.display = "block";
 
     resultado.className = "ok";
 
     resultado.innerHTML =
-      "Información enviada correctamente.<br><br>" +
-      "Radicado generado:<br><strong>" +
-      data.resultado +
-      "</strong>";
+      "Información enviada correctamente.";
 
-    // LIMPIAR FORMULARIO
+    // LIMPIAR
 
     document.getElementById("asunto").value = "";
     document.getElementById("destinatario").value = "";
@@ -216,8 +212,6 @@ async function enviar(){
 
     resultado.innerHTML =
       "Error enviando información.";
-
-    console.error(error);
 
   }
 
