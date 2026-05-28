@@ -1,5 +1,5 @@
-<html lang="es">
 <!DOCTYPE html>
+<html lang="es">
 
 <head>
 
@@ -144,9 +144,6 @@ color:#f4d35e;
 font-weight:bold;
 }
 
-
-/* INPUTS Y SELECT */
-
 input,
 select{
 
@@ -167,17 +164,12 @@ outline:none;
 font-size:15px;
 }
 
-
-/* OPCIONES DEL SELECT */
-
 select option{
 
 background:#ffffff;
 
 color:#000000;
-
 }
-
 
 button{
 
@@ -200,10 +192,19 @@ font-weight:bold;
 cursor:pointer;
 
 margin-top:15px;
+
+transition:.3s;
 }
 
 button:hover{
 opacity:.9;
+}
+
+button:disabled{
+
+opacity:.7;
+
+cursor:not-allowed;
 }
 
 #resultado,
@@ -267,6 +268,7 @@ flex-direction:column;
 <img
 src="Escudo_Policía_Nacional_de_Colombia.png"
 class="logo"
+alt="Escudo Policía Nacional"
 >
 
 <h1>POLICÍA NACIONAL DE COLOMBIA</h1>
@@ -317,23 +319,13 @@ class="contenido activo"
 <input type="text" id="destinatario">
 </div>
 
-<!v class="grupo">
-<!label></label>
-<!!input type="text" id="grado">
-<!!!/div>
-
 <div class="grupo">
 <label>Nombre quien Radica *</label>
 <input type="text" id="nombre">
 </div>
 
-<!div class="grupo">
-<!label><!/label>
-<!input type="text" id="telefono">
-<!/div>
-
 <div class="grupo">
-<label>Correo de donde sale el comunicado*</label>
+<label>Correo de donde sale el comunicado *</label>
 <input type="email" id="correo">
 </div>
 
@@ -468,18 +460,24 @@ const URL_SCRIPT =
 
 
 
+// CAMBIO DE TABS
+
 function mostrarTab(id, elemento){
 
 document
 .querySelectorAll(".contenido")
 .forEach(c=>{
+
 c.classList.remove("activo");
+
 });
 
 document
 .querySelectorAll(".tab")
 .forEach(t=>{
+
 t.classList.remove("activa");
+
 });
 
 document
@@ -508,14 +506,8 @@ document.getElementById("asunto");
 const destinatario =
 document.getElementById("destinatario");
 
-const grado =
-document.getElementById("grado");
-
 const nombre =
 document.getElementById("nombre");
-
-const telefono =
-document.getElementById("telefono");
 
 const correo =
 document.getElementById("correo");
@@ -532,9 +524,7 @@ document.getElementById("firmado");
 [
 asunto,
 destinatario,
-grado,
 nombre,
-telefono,
 correo,
 reviso,
 firmado
@@ -546,15 +536,13 @@ campo.style.border =
 });
 
 
-// VALIDAR
+// VALIDAR CAMPOS
 
 if(
-!asunto.value ||
-!destinatario.value ||
-!grado.value ||
-!nombre.value ||
-!telefono.value ||
-!correo.value ||
+!asunto.value.trim() ||
+!destinatario.value.trim() ||
+!nombre.value.trim() ||
+!correo.value.trim() ||
 !reviso.value ||
 !firmado.value
 ){
@@ -566,15 +554,13 @@ resultado.className =
 "error";
 
 resultado.innerHTML =
-
 "❌ Debe diligenciar todos los campos obligatorios.";
+
 
 [
 asunto,
 destinatario,
-grado,
 nombre,
-telefono,
 correo,
 reviso,
 firmado
@@ -597,28 +583,23 @@ return;
 boton.disabled = true;
 
 boton.innerHTML =
-"Espere un momento Enviando Informacion"
+"Espere un momento...";
+
 
 
 const datos = {
 
 asunto:
-asunto.value,
+asunto.value.trim(),
 
 destinatario:
-destinatario.value,
-
-grado:
-grado.value,
+destinatario.value.trim(),
 
 nombre:
-nombre.value,
-
-telefono:
-telefono.value,
+nombre.value.trim(),
 
 correo:
-correo.value,
+correo.value.trim(),
 
 reviso:
 reviso.value,
@@ -629,6 +610,7 @@ firmado.value
 };
 
 
+
 try {
 
 const response =
@@ -637,18 +619,20 @@ await fetch(URL_SCRIPT,{
 method:"POST",
 
 headers:{
-"Content-Type":"text/plain"
+"Content-Type":"application/json"
 },
 
 body:JSON.stringify(datos)
 
 });
 
+
 const data =
 await response.json();
 
 resultado.style.display =
 "block";
+
 
 if(data.success){
 
@@ -687,13 +671,19 @@ resultado.innerHTML =
 
 } catch(error){
 
+console.error(error);
+
 resultado.className =
 "error";
 
+resultado.style.display =
+"block";
+
 resultado.innerHTML =
-"❌ Error de conexión.";
+"❌ Error de conexión con Google Apps Script.";
 
 }
+
 
 boton.disabled = false;
 
@@ -711,18 +701,37 @@ async function consultarRadicado(){
 const radicado =
 document.getElementById(
 "radicadoBuscar"
-).value;
+).value.trim();
 
 const resultado =
 document.getElementById(
 "consultaResultado"
 );
 
+if(!radicado){
+
 resultado.style.display =
 "block";
 
+resultado.className =
+"error";
+
+resultado.innerHTML =
+"❌ Debe ingresar un número de radicado.";
+
+return;
+
+}
+
+resultado.style.display =
+"block";
+
+resultado.className =
+"ok";
+
 resultado.innerHTML =
 "Consultando...";
+
 
 try {
 
@@ -732,7 +741,7 @@ await fetch(URL_SCRIPT,{
 method:"POST",
 
 headers:{
-"Content-Type":"text/plain"
+"Content-Type":"application/json"
 },
 
 body:JSON.stringify({
@@ -748,9 +757,11 @@ radicado:radicado
 const data =
 await response.json();
 
+
 if(data.success){
 
-resultado.className = "ok";
+resultado.className =
+"ok";
 
 resultado.innerHTML =
 
@@ -779,7 +790,8 @@ resultado.innerHTML =
 
 } else {
 
-resultado.className = "error";
+resultado.className =
+"error";
 
 resultado.innerHTML =
 "❌ " + data.error;
@@ -788,7 +800,10 @@ resultado.innerHTML =
 
 } catch(error){
 
-resultado.className = "error";
+console.error(error);
+
+resultado.className =
+"error";
 
 resultado.innerHTML =
 "❌ Error consultando radicado.";
@@ -798,6 +813,7 @@ resultado.innerHTML =
 }
 
 
+
 // QR
 
 function generarQR(){
@@ -805,12 +821,21 @@ function generarQR(){
 const texto =
 document.getElementById(
 "textoQR"
-).value;
+).value.trim();
 
 const qr =
 document.getElementById(
 "qrResultado"
 );
+
+if(!texto){
+
+qr.innerHTML =
+"<p>❌ Debe ingresar un texto.</p>";
+
+return;
+
+}
 
 qr.innerHTML =
 
@@ -818,7 +843,7 @@ qr.innerHTML =
 
 + encodeURIComponent(texto)
 
-+ "'>";
++ "' alt='Código QR'>";
 
 }
 
