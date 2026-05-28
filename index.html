@@ -6,310 +6,232 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sistema de Radicación JESEP - Policía Nacional</title>
+<title>Policía Nacional - Sistema Radicación JESEP-GUTAH</title>
 
 <style>
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
 
-  font-family:
-    "Segoe UI",
-    Tahoma,
-    Geneva,
-    Verdana,
-    sans-serif;
+font-family:Arial;
 
-  background:
-    linear-gradient(
-      rgba(0,0,0,.85),
-      rgba(0,0,0,.85)
-    ),
-    url('1-fescol-policia-abuso-cilives-1.jpg');
+background:
+linear-gradient(
+rgba(0,0,0,.85),
+rgba(0,0,0,.85)
+),
+url('1-fescol-policia-abuso-cilives-1.jpg');
 
-  background-size:cover;
-  background-position:center;
-  background-attachment:fixed;
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
 
-  min-height:100vh;
+min-height:100vh;
 
-  color:white;
+padding:20px;
 
-  padding:20px;
+color:white;
 }
 
 .contenedor{
 
-  max-width:1000px;
+max-width:1000px;
 
-  margin:auto;
+margin:auto;
 
-  background:
-    rgba(10,15,25,.82);
+background:rgba(10,15,25,.82);
 
-  backdrop-filter:blur(10px);
+border-radius:20px;
 
-  border:
-    1px solid rgba(255,255,255,.08);
+overflow:hidden;
 
-  border-radius:20px;
-
-  overflow:hidden;
-
-  box-shadow:
-    0 8px 40px rgba(0,0,0,.7);
+box-shadow:0 0 30px rgba(0,0,0,.6);
 }
 
 .header{
 
-  text-align:center;
+text-align:center;
 
-  padding:35px 20px;
+padding:30px;
 
-  background:
-    linear-gradient(
-      90deg,
-      #0b1320,
-      #132238
-    );
+background:#0d1b2a;
 
-  border-bottom:
-    4px solid #d4af37;
+border-bottom:4px solid #d4af37;
 }
 
 .logo{
 
-  width:120px;
+width:120px;
 
-  margin-bottom:15px;
+margin-bottom:10px;
 }
 
 .header h1{
 
-  color:#d4af37;
+color:#d4af37;
 
-  font-size:34px;
-
-  margin-bottom:10px;
+font-size:30px;
 }
 
 .header h2{
 
-  color:#dfe6ee;
+font-weight:normal;
 
-  font-size:18px;
-
-  font-weight:400;
+margin-top:10px;
 }
 
 .tabs{
 
-  display:flex;
+display:flex;
 
-  background:#111b2d;
+background:#132238;
 }
 
 .tab{
 
-  flex:1;
+flex:1;
 
-  padding:18px;
+padding:18px;
 
-  text-align:center;
+text-align:center;
 
-  cursor:pointer;
+cursor:pointer;
 
-  transition:.3s;
+font-weight:bold;
 
-  font-weight:600;
-
-  border-right:
-    1px solid rgba(255,255,255,.08);
-}
-
-.tab:last-child{
-  border-right:none;
+transition:.3s;
 }
 
 .tab:hover{
-  background:#1f3555;
+background:#1f3555;
 }
 
 .tab.activa{
 
-  background:#d4af37;
+background:#d4af37;
 
-  color:black;
-
-  font-weight:bold;
+color:black;
 }
 
 .contenido{
 
-  display:none;
+display:none;
 
-  padding:35px;
+padding:30px;
 }
 
 .contenido.activo{
-  display:block;
-}
-
-.contenido h2{
-
-  margin-bottom:25px;
-
-  color:#d4af37;
-
-  border-left:
-    5px solid #d4af37;
-
-  padding-left:12px;
+display:block;
 }
 
 .grupo{
-  margin-bottom:20px;
+margin-bottom:18px;
 }
 
 label{
 
-  display:block;
+display:block;
 
-  margin-bottom:8px;
+margin-bottom:8px;
 
-  font-weight:600;
+color:#f4d35e;
 
-  color:#f4d35e;
+font-weight:bold;
 }
 
 input,
 select{
 
-  width:100%;
+width:100%;
 
-  padding:14px;
+padding:13px;
 
-  border-radius:10px;
+border:none;
 
-  border:
-    1px solid rgba(255,255,255,.12);
+border-radius:8px;
 
-  background:
-    rgba(255,255,255,.06);
+background:#1f2937;
 
-  color:white;
-
-  font-size:15px;
-}
-
-input::placeholder{
-  color:#ccc;
-}
-
-option{
-  color:black;
+color:white;
 }
 
 button{
 
-  width:100%;
+width:100%;
 
-  padding:15px;
+padding:14px;
 
-  border:none;
+border:none;
 
-  border-radius:10px;
+border-radius:8px;
 
-  background:
-    linear-gradient(
-      90deg,
-      #d4af37,
-      #f1c40f
-    );
+background:#d4af37;
 
-  color:black;
+color:black;
 
-  font-size:16px;
+font-size:16px;
 
-  font-weight:bold;
+font-weight:bold;
 
-  cursor:pointer;
+cursor:pointer;
 
-  transition:.3s;
+margin-top:15px;
 }
 
 button:hover{
-  transform:translateY(-2px);
+opacity:.9;
 }
 
 #resultado,
 #consultaResultado{
 
-  margin-top:25px;
+margin-top:20px;
 
-  padding:18px;
+padding:18px;
 
-  border-radius:10px;
+border-radius:10px;
 
-  display:none;
+display:none;
 
-  line-height:1.8;
-
-  font-size:16px;
+line-height:1.8;
 }
 
 .ok{
 
-  background:
-    rgba(22,101,52,.8);
-
-  border:
-    1px solid #22c55e;
+background:#14532d;
 }
 
 .error{
 
-  background:
-    rgba(127,29,29,.8);
-
-  border:
-    1px solid #ef4444;
+background:#7f1d1d;
 }
 
 .qr-box{
 
-  text-align:center;
+margin-top:20px;
 
-  margin-top:25px;
+text-align:center;
 }
 
 .qr-box img{
 
-  background:white;
+background:white;
 
-  padding:15px;
+padding:10px;
 
-  border-radius:15px;
+border-radius:10px;
 }
 
 @media(max-width:768px){
 
-  .tabs{
-    flex-direction:column;
-  }
-
-  .header h1{
-    font-size:25px;
-  }
-
-  .contenido{
-    padding:20px;
-  }
+.tabs{
+flex-direction:column;
+}
 
 }
 
@@ -330,11 +252,9 @@ class="logo"
 
 <h1>POLICÍA NACIONAL DE COLOMBIA</h1>
 
-<h2>Sistema Institucional de Radicación JESEP</h2>
+<h2>Sistema Institucional de Radicación JESEP - GUTAH </h2>
 
 </div>
-
-<!-- TABS -->
 
 <div class="tabs">
 
@@ -361,14 +281,12 @@ onclick="mostrarTab('qr', this)"
 
 </div>
 
-<!-- MODULO RADICACION -->
+<!-- RADICACION -->
 
 <div
 id="radicacion"
 class="contenido activo"
 >
-
-<h2>Módulo de Radicación</h2>
 
 <div class="grupo">
 <label>Asunto</label>
@@ -391,12 +309,12 @@ class="contenido activo"
 </div>
 
 <div class="grupo">
-<label>Número Telefónico</label>
+<label>Teléfono</label>
 <input type="text" id="telefono">
 </div>
 
 <div class="grupo">
-<label>Correo Dependencia</label>
+<label>Correo</label>
 <input type="email" id="correo">
 </div>
 
@@ -407,7 +325,7 @@ class="contenido activo"
 <select id="reviso">
 
 <option value="">
-Seleccione una opción
+Seleccione
 </option>
 
 <option value="MY. TIQUE BONILLA EMMA PAOLA">
@@ -424,44 +342,15 @@ TE. LEON MARTINEZ KAREN NATALIA
 
 <div class="grupo">
 
-<label>
-Firmado por el jefe de Oficina
-</label>
+<label>Firmado jefe oficina</label>
 
-<div style="
-display:flex;
-gap:30px;
-margin-top:10px;
-">
+<select id="firmado">
 
-<label style="color:white;">
+<option value="SI">SI</option>
 
-<input
-type="radio"
-name="firmado"
-value="SI"
-checked
-style="width:auto;"
->
+<option value="NO">NO</option>
 
-SI
-
-</label>
-
-<label style="color:white;">
-
-<input
-type="radio"
-name="firmado"
-value="NO"
-style="width:auto;"
->
-
-NO
-
-</label>
-
-</div>
+</select>
 
 </div>
 
@@ -478,23 +367,21 @@ Enviar Información
 
 </div>
 
-<!-- MODULO CONSULTA -->
+<!-- CONSULTA -->
 
 <div
 id="consulta"
 class="contenido"
 >
 
-<h2>Consulta de Radicados</h2>
-
 <div class="grupo">
 
-<label>Número de Radicado</label>
+<label>Número Radicado</label>
 
 <input
 type="text"
 id="radicadoBuscar"
-placeholder="Ej: RAD-01653"
+placeholder="RAD-00001"
 >
 
 </div>
@@ -509,23 +396,21 @@ Consultar Radicado
 
 </div>
 
-<!-- MODULO QR -->
+<!-- QR -->
 
 <div
 id="qr"
 class="contenido"
 >
 
-<h2>Generador Código QR</h2>
-
 <div class="grupo">
 
-<label>Ingrese Radicado</label>
+<label>Texto QR</label>
 
 <input
 type="text"
 id="textoQR"
-placeholder="RAD-01653"
+placeholder="RAD-00001"
 >
 
 </div>
@@ -547,25 +432,30 @@ id="qrResultado"
 
 <script>
 
+const URL_SCRIPT =
+"https://script.google.com/macros/s/AKfycbxrZp-VjHlZoV6ELJ4-Qa3njhahfFSgQlyC12GIGe-ElkcW1RKxdVv9Qo5ZTwhpPYmN9Q/exec";
+
+
+
 function mostrarTab(id, elemento){
 
-  document
-    .querySelectorAll(".contenido")
-    .forEach(c => {
-      c.classList.remove("activo");
-    });
+document
+.querySelectorAll(".contenido")
+.forEach(c=>{
+c.classList.remove("activo");
+});
 
-  document
-    .querySelectorAll(".tab")
-    .forEach(t => {
-      t.classList.remove("activa");
-    });
+document
+.querySelectorAll(".tab")
+.forEach(t=>{
+t.classList.remove("activa");
+});
 
-  document
-    .getElementById(id)
-    .classList.add("activo");
+document
+.getElementById(id)
+.classList.add("activo");
 
-  elemento.classList.add("activa");
+elemento.classList.add("activa");
 
 }
 
@@ -573,115 +463,102 @@ function mostrarTab(id, elemento){
 
 async function enviar(){
 
-  const boton =
-    document.getElementById("btnEnviar");
+const boton =
+document.getElementById("btnEnviar");
 
-  const resultado =
-    document.getElementById("resultado");
+const resultado =
+document.getElementById("resultado");
 
-  boton.disabled = true;
+boton.disabled = true;
 
-  boton.innerHTML = "Enviando...";
+boton.innerHTML = "Enviando...";
 
-  const datos = {
+const datos = {
 
-    asunto:
-      document.getElementById("asunto").value,
+asunto:
+document.getElementById("asunto").value,
 
-    destinatario:
-      document.getElementById("destinatario").value,
+destinatario:
+document.getElementById("destinatario").value,
 
-    grado:
-      document.getElementById("grado").value,
+grado:
+document.getElementById("grado").value,
 
-    nombre:
-      document.getElementById("nombre").value,
+nombre:
+document.getElementById("nombre").value,
 
-    telefono:
-      document.getElementById("telefono").value,
+telefono:
+document.getElementById("telefono").value,
 
-    correo:
-      document.getElementById("correo").value,
+correo:
+document.getElementById("correo").value,
 
-    reviso:
-      document.getElementById("reviso").value,
+reviso:
+document.getElementById("reviso").value,
 
-    firmado:
-      document.querySelector(
-        'input[name="firmado"]:checked'
-      ).value
+firmado:
+document.getElementById("firmado").value
 
-  };
+};
 
-  try {
+try {
 
-    const response =
-      await fetch(
-        "https://script.google.com/macros/s/AKfycbxsiEbTPCtc7prm_xxuWoPGVEEBdYd_Lzj-17NtlbUVUe7mSzh-dMKcfyzQOFEbybpcFg/exec",
-        {
+const response =
+await fetch(URL_SCRIPT,{
 
-          method:"POST",
+method:"POST",
 
-          headers:{
-            "Content-Type":"text/plain"
-          },
+headers:{
+"Content-Type":"text/plain"
+},
 
-          body:JSON.stringify(datos)
+body:JSON.stringify(datos)
 
-        }
-      );
+});
 
-    const data =
-      await response.json();
+const data =
+await response.json();
 
-    resultado.style.display = "block";
+resultado.style.display = "block";
 
-    if(data.success){
+if(data.success){
 
-      resultado.className = "ok";
+resultado.className = "ok";
 
-      resultado.innerHTML =
+resultado.innerHTML =
 
-        "✅ Información enviada correctamente.<br><br>" +
+"✅ Radicado generado correctamente.<br><br>" +
 
-        "📄 Radicado generado:<br><strong>" +
+"<strong>" +
 
-        data.radicado +
+data.radicado +
 
-        "</strong>";
+"</strong>";
 
-      document.getElementById("asunto").value = "";
-      document.getElementById("destinatario").value = "";
-      document.getElementById("grado").value = "";
-      document.getElementById("nombre").value = "";
-      document.getElementById("telefono").value = "";
-      document.getElementById("correo").value = "";
-      document.getElementById("reviso").value = "";
+} else {
 
-    } else {
+resultado.className = "error";
 
-      resultado.className = "error";
+resultado.innerHTML =
+"❌ " + data.error;
 
-      resultado.innerHTML =
-        "❌ " + data.error;
+}
 
-    }
+} catch(error){
 
-  } catch(error){
+resultado.style.display = "block";
 
-    resultado.style.display = "block";
+resultado.className = "error";
 
-    resultado.className = "error";
+resultado.innerHTML =
+"❌ Error de conexión.";
 
-    resultado.innerHTML =
-      "❌ Error de conexión.";
+}
 
-  }
+boton.disabled = false;
 
-  boton.disabled = false;
-
-  boton.innerHTML =
-    "Enviar Información";
+boton.innerHTML =
+"Enviar Información";
 
 }
 
@@ -689,101 +566,95 @@ async function enviar(){
 
 async function consultarRadicado(){
 
-  const radicado =
-    document.getElementById(
-      "radicadoBuscar"
-    ).value;
+const radicado =
+document.getElementById(
+"radicadoBuscar"
+).value;
 
-  const resultado =
-    document.getElementById(
-      "consultaResultado"
-    );
+const resultado =
+document.getElementById(
+"consultaResultado"
+);
 
-  resultado.style.display =
-    "block";
+resultado.style.display =
+"block";
 
-  resultado.innerHTML =
-    "Consultando...";
+resultado.innerHTML =
+"Consultando...";
 
-  try {
+try {
 
-    const response =
-      await fetch(
-        "https://script.google.com/macros/s/AKfycbxVH7XF7cTms_1D534OfgQTKTBjkxhbLSmNxyYXkawK-xudwoJG1hkYSDPUnfXTAEdx_g/exec",
-        {
+const response =
+await fetch(URL_SCRIPT,{
 
-          method:"POST",
+method:"POST",
 
-          headers:{
-            "Content-Type":"text/plain"
-          },
+headers:{
+"Content-Type":"text/plain"
+},
 
-          body:JSON.stringify({
+body:JSON.stringify({
 
-            accion:"consultar",
+accion:"consultar",
 
-            radicado:radicado
+radicado:radicado
 
-          })
+})
 
-        }
-      );
+});
 
-    const data =
-      await response.json();
+const data =
+await response.json();
 
-    if(data.success){
+if(data.success){
 
-      resultado.className = "ok";
+resultado.className = "ok";
 
-      resultado.innerHTML =
+resultado.innerHTML =
 
-        "<strong>📄 INFORMACIÓN DEL RADICADO</strong><br><br>" +
+"<strong>📄 INFORMACIÓN DEL RADICADO</strong><br><br>" +
 
-        "<strong>Radicado:</strong> "
-        + (data.radicado || "") + "<br><br>" +
+"<strong>Asunto:</strong> "
++ (data.asunto || "") + "<br><br>" +
 
-        "<strong>Asunto:</strong> "
-        + (data.asunto || "") + "<br><br>" +
+"<strong>Destinatario:</strong> "
++ (data.destinatario || "") + "<br><br>" +
 
-        "<strong>Destinatario:</strong> "
-        + (data.destinatario || "") + "<br><br>" +
+"<strong>Fecha y hora:</strong> "
++ (data.fecha || "") + "<br><br>" +
 
-        "<strong>Fecha y hora:</strong> "
-        + (data.fecha || "") + "<br><br>" +
+"<strong>Nombre quien Radicó:</strong> "
++ (data.nombre || "") + "<br><br>" +
 
-        "<strong>Nombre quien Radicó:</strong> "
-        + (data.nombre || "") + "<br><br>" +
+"<strong>Teléfono:</strong> "
++ (data.telefono || "") + "<br><br>" +
 
-        "<strong>Teléfono:</strong> "
-        + (data.telefono || "") + "<br><br>" +
+"<strong>Correo:</strong> "
++ (data.correo || "") + "<br><br>" +
 
-        "<strong>Correo:</strong> "
-        + (data.correo || "") + "<br><br>" +
+"<strong>Quien Revisó:</strong> "
++ (data.reviso || "") + "<br><br>" +
 
-        "<strong>Quien Revisó:</strong> "
-        + (data.reviso || "Sin información") + "<br><br>" +
+"<strong>Firmado jefe oficina:</strong> "
++ (data.firmado || "");
 
-        "<strong>Firmado jefe oficina:</strong> "
-        + (data.firmado || "Sin información");
+} else {
 
-    } else {
+resultado.className = "error";
 
-      resultado.className = "error";
+resultado.innerHTML =
+"❌ " + data.error;
 
-      resultado.innerHTML =
-        "❌ " + data.error;
+}
 
-    }
+} catch(error){
 
-  } catch(error){
+resultado.className = "error";
 
-    resultado.className = "error";
+resultado.innerHTML =
+"❌ Error consultando radicado.";
 
-    resultado.innerHTML =
-      "❌ Error consultando radicado.";
-
-  }
+}
 
 }
 
@@ -791,23 +662,23 @@ async function consultarRadicado(){
 
 function generarQR(){
 
-  const texto =
-    document.getElementById(
-      "textoQR"
-    ).value;
+const texto =
+document.getElementById(
+"textoQR"
+).value;
 
-  const qr =
-    document.getElementById(
-      "qrResultado"
-    );
+const qr =
+document.getElementById(
+"qrResultado"
+);
 
-  qr.innerHTML =
+qr.innerHTML =
 
-    "<img src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl="
+"<img src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl="
 
-    + encodeURIComponent(texto)
++ encodeURIComponent(texto)
 
-    + "'>";
++ "'>";
 
 }
 
