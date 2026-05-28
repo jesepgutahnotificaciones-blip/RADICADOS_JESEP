@@ -1,183 +1,79 @@
-<html lang="es">
+```html
 <!DOCTYPE html>
+<html lang="es">
 
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Policía Nacional - Sistema Radicación JESEP-GUTAH</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<base target="_top">
+
+<title>Sistema de Radicación</title>
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
 
 body{
 
 font-family:Arial;
 
-background:
-linear-gradient(
-rgba(0,0,0,.85),
-rgba(0,0,0,.85)
-),
-url('1-fescol-policia-abuso-cilives-1.jpg');
-
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
-
-min-height:100vh;
+background:#f4f4f4;
 
 padding:20px;
-
-color:white;
 }
 
 .contenedor{
 
-max-width:1000px;
+background:white;
+
+max-width:550px;
 
 margin:auto;
 
-background:rgba(10,15,25,.82);
+padding:25px;
 
-border-radius:20px;
+border-radius:10px;
 
-overflow:hidden;
-
-box-shadow:0 0 30px rgba(0,0,0,.6);
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-.header{
+h2{
 
 text-align:center;
 
-padding:30px;
+color:#1a73e8;
 
-background:#0d1b2a;
-
-border-bottom:4px solid #d4af37;
-}
-
-.logo{
-
-width:120px;
-
-margin-bottom:10px;
-}
-
-.header h1{
-
-color:#d4af37;
-
-font-size:30px;
-}
-
-.header h2{
-
-font-weight:normal;
-
-margin-top:10px;
-}
-
-.tabs{
-
-display:flex;
-
-background:#132238;
-}
-
-.tab{
-
-flex:1;
-
-padding:18px;
-
-text-align:center;
-
-cursor:pointer;
-
-font-weight:bold;
-
-transition:.3s;
-}
-
-.tab:hover{
-background:#1f3555;
-}
-
-.tab.activa{
-
-background:#d4af37;
-
-color:black;
-}
-
-.contenido{
-
-display:none;
-
-padding:30px;
-}
-
-.contenido.activo{
-display:block;
+margin-bottom:20px;
 }
 
 .grupo{
-margin-bottom:18px;
+
+margin-bottom:15px;
 }
 
-label{
-
-display:block;
-
-margin-bottom:8px;
-
-color:#f4d35e;
-
-font-weight:bold;
-}
-
-
-/* INPUTS Y SELECT */
-
-input,
-select{
+input{
 
 width:100%;
 
-padding:13px;
+padding:12px;
 
-border:none;
+border:1px solid #ccc;
 
-border-radius:8px;
+border-radius:5px;
 
-background:#1f2937;
-
-color:white;
-
-outline:none;
+box-sizing:border-box;
 
 font-size:15px;
 }
 
+input:focus{
 
-/* OPCIONES DEL SELECT */
+outline:none;
 
-select option{
-
-background:#ffffff;
-
-color:#000000;
-
+border:1px solid #4285F4;
 }
-
 
 button{
 
@@ -185,73 +81,62 @@ width:100%;
 
 padding:14px;
 
+margin-top:10px;
+
 border:none;
 
-border-radius:8px;
+border-radius:5px;
 
-background:#d4af37;
+background:#4285F4;
 
-color:black;
+color:white;
 
 font-size:16px;
 
-font-weight:bold;
-
 cursor:pointer;
-
-margin-top:15px;
 }
 
 button:hover{
-opacity:.9;
+
+background:#3367D6;
 }
 
-#resultado,
-#consultaResultado{
+button:disabled{
+
+background:#9bbcf7;
+
+cursor:not-allowed;
+}
+
+#resultado{
 
 margin-top:20px;
 
-padding:18px;
+padding:15px;
 
-border-radius:10px;
+border-radius:5px;
+
+text-align:center;
+
+font-size:17px;
+
+font-weight:bold;
 
 display:none;
-
-line-height:1.8;
 }
 
 .ok{
 
-background:#14532d;
+background:#e6f4ea;
+
+color:#137333;
 }
 
 .error{
 
-background:#7f1d1d;
-}
+background:#fce8e6;
 
-.qr-box{
-
-margin-top:20px;
-
-text-align:center;
-}
-
-.qr-box img{
-
-background:white;
-
-padding:10px;
-
-border-radius:10px;
-}
-
-@media(max-width:768px){
-
-.tabs{
-flex-direction:column;
-}
-
+color:#c5221f;
 }
 
 </style>
@@ -262,133 +147,53 @@ flex-direction:column;
 
 <div class="contenedor">
 
-<div class="header">
-
-<img
-src="Escudo_Policía_Nacional_de_Colombia.png"
-class="logo"
->
-
-<h1>POLICÍA NACIONAL DE COLOMBIA</h1>
-
-<h2>Sistema Institucional de Radicación JESEP - GUTAH</h2>
-
-</div>
-
-<div class="tabs">
-
-<div
-class="tab activa"
-onclick="mostrarTab('radicacion', this)"
->
-📄 Radicación
-</div>
-
-<div
-class="tab"
-onclick="mostrarTab('consulta', this)"
->
-🔍 Consulta
-</div>
-
-<div
-class="tab"
-onclick="mostrarTab('qr', this)"
->
-📱 QR
-</div>
-
-</div>
-
-<!-- RADICACION -->
-
-<div
-id="radicacion"
-class="contenido activo"
->
+<h2>Formulario de Radicación</h2>
 
 <div class="grupo">
-<label>Asunto *</label>
-<input type="text" id="asunto">
+<input
+type="text"
+id="asunto"
+placeholder="Asunto *">
 </div>
 
 <div class="grupo">
-<label>Destinatario *</label>
-<input type="text" id="destinatario">
-</div>
-
-<!v class="grupo">
-<!label></label>
-<!!input type="text" id="grado">
-<!!!/div>
-
-<div class="grupo">
-<label>Nombre quien Radica *</label>
-<input type="text" id="nombre">
-</div>
-
-<!div class="grupo">
-<!label><!/label>
-<!input type="text" id="telefono">
-<!/div>
-
-<div class="grupo">
-<label>Correo de donde sale el comunicado*</label>
-<input type="email" id="correo">
+<input
+type="text"
+id="destinatario"
+placeholder="Destinatario *">
 </div>
 
 <div class="grupo">
-
-<label>Revisó y Aprobó *</label>
-
-<select id="reviso">
-
-<option value="">
-Seleccione
-</option>
-
-<option value="MY. TIQUE BONILLA EMMA PAOLA">
-MY. TIQUE BONILLA EMMA PAOLA
-</option>
-
-<option value="TE. LEON MARTINEZ KAREN NATALIA">
-TE. LEON MARTINEZ KAREN NATALIA
-</option>
-
-<option value="N/A">
-No Aplica
-</option>
-
-</select>
-
+<input
+type="text"
+id="grado"
+placeholder="Grado *">
 </div>
 
 <div class="grupo">
+<input
+type="text"
+id="nombre"
+placeholder="Nombres de quien Radica *">
+</div>
 
-<label>Firmado jefe oficina *</label>
+<div class="grupo">
+<input
+type="text"
+id="telefono"
+placeholder="Número Telefónico *">
+</div>
 
-<select id="firmado">
-
-<option value="">
-Seleccione
-</option>
-
-<option value="SI">
-SI
-</option>
-
-<option value="NO">
-NO
-</option>
-
-</select>
-
+<div class="grupo">
+<input
+type="email"
+id="correo"
+placeholder="Correo Dependencia *">
 </div>
 
 <button
 onclick="enviar()"
-id="btnEnviar"
->
+id="btnEnviar">
 
 Enviar Información
 
@@ -398,155 +203,55 @@ Enviar Información
 
 </div>
 
-<!-- CONSULTA -->
-
-<div
-id="consulta"
-class="contenido"
->
-
-<div class="grupo">
-
-<label>Número Radicado</label>
-
-<input
-type="text"
-id="radicadoBuscar"
-placeholder="RAD-00001"
->
-
-</div>
-
-<button onclick="consultarRadicado()">
-
-Consultar Radicado
-
-</button>
-
-<div id="consultaResultado"></div>
-
-</div>
-
-<!-- QR -->
-
-<div
-id="qr"
-class="contenido"
->
-
-<div class="grupo">
-
-<label>Texto QR</label>
-
-<input
-type="text"
-id="textoQR"
-placeholder="RAD-00001"
->
-
-</div>
-
-<button onclick="generarQR()">
-
-Generar QR
-
-</button>
-
-<div
-class="qr-box"
-id="qrResultado"
-></div>
-
-</div>
-
-</div>
-
 <script>
 
-const URL_SCRIPT =
-"https://script.google.com/macros/s/AKfycbxrZp-VjHlZoV6ELJ4-Qa3njhahfFSgQlyC12GIGe-ElkcW1RKxdVv9Qo5ZTwhpPYmN9Q/exec";
-
-
-
-function mostrarTab(id, elemento){
-
-document
-.querySelectorAll(".contenido")
-.forEach(c=>{
-c.classList.remove("activo");
-});
-
-document
-.querySelectorAll(".tab")
-.forEach(t=>{
-t.classList.remove("activa");
-});
-
-document
-.getElementById(id)
-.classList.add("activo");
-
-elemento.classList.add("activa");
-
-}
-
-
-
-// ENVIAR
-
-async function enviar(){
+function enviar(){
 
 const boton =
-document.getElementById("btnEnviar");
+document.getElementById(
+"btnEnviar"
+);
 
 const resultado =
-document.getElementById("resultado");
+document.getElementById(
+"resultado"
+);
+
+
+// CAMPOS
 
 const asunto =
-document.getElementById("asunto");
+document.getElementById(
+"asunto"
+);
 
 const destinatario =
-document.getElementById("destinatario");
+document.getElementById(
+"destinatario"
+);
 
 const grado =
-document.getElementById("grado");
+document.getElementById(
+"grado"
+);
 
 const nombre =
-document.getElementById("nombre");
+document.getElementById(
+"nombre"
+);
 
 const telefono =
-document.getElementById("telefono");
+document.getElementById(
+"telefono"
+);
 
 const correo =
-document.getElementById("correo");
-
-const reviso =
-document.getElementById("reviso");
-
-const firmado =
-document.getElementById("firmado");
+document.getElementById(
+"correo"
+);
 
 
-// LIMPIAR BORDES
-
-[
-asunto,
-destinatario,
-grado,
-nombre,
-telefono,
-correo,
-reviso,
-firmado
-].forEach(campo=>{
-
-campo.style.border =
-"none";
-
-});
-
-
-// VALIDAR
+// VALIDACIÓN
 
 if(
 !asunto.value ||
@@ -554,9 +259,7 @@ if(
 !grado.value ||
 !nombre.value ||
 !telefono.value ||
-!correo.value ||
-!reviso.value ||
-!firmado.value
+!correo.value
 ){
 
 resultado.style.display =
@@ -567,38 +270,22 @@ resultado.className =
 
 resultado.innerHTML =
 
-"❌ Debe diligenciar todos los campos obligatorios.";
-
-[
-asunto,
-destinatario,
-grado,
-nombre,
-telefono,
-correo,
-reviso,
-firmado
-].forEach(campo=>{
-
-if(!campo.value){
-
-campo.style.border =
-"2px solid #ef4444";
-
-}
-
-});
+"❌ Debe diligenciar todos los campos.";
 
 return;
 
 }
 
 
+// BLOQUEAR BOTÓN
+
 boton.disabled = true;
 
 boton.innerHTML =
-"Espere un momento Enviando Informacion"
+"Enviando...";
 
+
+// DATOS
 
 const datos = {
 
@@ -618,50 +305,30 @@ telefono:
 telefono.value,
 
 correo:
-correo.value,
-
-reviso:
-reviso.value,
-
-firmado:
-firmado.value
+correo.value
 
 };
 
 
-try {
+// ENVIAR A APPS SCRIPT
 
-const response =
-await fetch(URL_SCRIPT,{
+google.script.run
 
-method:"POST",
-
-headers:{
-"Content-Type":"text/plain"
-},
-
-body:JSON.stringify(datos)
-
-});
-
-const data =
-await response.json();
+.withSuccessHandler(function(respuesta){
 
 resultado.style.display =
 "block";
-
-if(data.success){
 
 resultado.className =
 "ok";
 
 resultado.innerHTML =
 
-"✅ Radicado generado correctamente.<br><br>" +
+"✅ Radicado generado:<br><br>" +
 
 "<strong>" +
 
-data.radicado +
+respuesta +
 
 "</strong>";
 
@@ -669,157 +336,52 @@ data.radicado +
 // LIMPIAR CAMPOS
 
 asunto.value = "";
+
 destinatario.value = "";
+
+grado.value = "";
+
 nombre.value = "";
+
+telefono.value = "";
+
 correo.value = "";
-reviso.value = "";
-firmado.value = "";
 
-} else {
 
-resultado.className =
-"error";
-
-resultado.innerHTML =
-"❌ " + data.error;
-
-}
-
-} catch(error){
-
-resultado.className =
-"error";
-
-resultado.innerHTML =
-"❌ Error de conexión.";
-
-}
+// ACTIVAR BOTÓN
 
 boton.disabled = false;
 
 boton.innerHTML =
 "Enviar Información";
 
-}
+})
 
-
-
-// CONSULTAR
-
-async function consultarRadicado(){
-
-const radicado =
-document.getElementById(
-"radicadoBuscar"
-).value;
-
-const resultado =
-document.getElementById(
-"consultaResultado"
-);
+.withFailureHandler(function(error){
 
 resultado.style.display =
 "block";
 
+resultado.className =
+"error";
+
 resultado.innerHTML =
-"Consultando...";
 
-try {
+"❌ Error enviando información.<br><br>" +
 
-const response =
-await fetch(URL_SCRIPT,{
+error.message;
 
-method:"POST",
 
-headers:{
-"Content-Type":"text/plain"
-},
+// ACTIVAR BOTÓN
 
-body:JSON.stringify({
+boton.disabled = false;
 
-accion:"consultar",
-
-radicado:radicado
+boton.innerHTML =
+"Enviar Información";
 
 })
 
-});
-
-const data =
-await response.json();
-
-if(data.success){
-
-resultado.className = "ok";
-
-resultado.innerHTML =
-
-"<strong>📄 INFORMACIÓN DEL RADICADO</strong><br><br>" +
-
-"<strong>Asunto:</strong> "
-+ (data.asunto || "") + "<br><br>" +
-
-"<strong>Destinatario:</strong> "
-+ (data.destinatario || "") + "<br><br>" +
-
-"<strong>Fecha y hora:</strong> "
-+ (data.fecha || "") + "<br><br>" +
-
-"<strong>Nombre quien Radicó:</strong> "
-+ (data.nombre || "") + "<br><br>" +
-
-"<strong>Correo:</strong> "
-+ (data.correo || "") + "<br><br>" +
-
-"<strong>Quien Revisó:</strong> "
-+ (data.reviso || "") + "<br><br>" +
-
-"<strong>Firmado jefe oficina:</strong> "
-+ (data.firmado || "");
-
-} else {
-
-resultado.className = "error";
-
-resultado.innerHTML =
-"❌ " + data.error;
-
-}
-
-} catch(error){
-
-resultado.className = "error";
-
-resultado.innerHTML =
-"❌ Error consultando radicado.";
-
-}
-
-}
-
-
-
-// QR
-
-function generarQR(){
-
-const texto =
-document.getElementById(
-"textoQR"
-).value;
-
-const qr =
-document.getElementById(
-"qrResultado"
-);
-
-qr.innerHTML =
-
-"<img src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl="
-
-+ encodeURIComponent(texto)
-
-+ "'>";
+.guardarDatos(datos);
 
 }
 
@@ -827,3 +389,4 @@ qr.innerHTML =
 
 </body>
 </html>
+```
