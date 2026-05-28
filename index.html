@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -158,6 +159,8 @@ border-radius:8px;
 background:#1f2937;
 
 color:white;
+
+outline:none;
 }
 
 button{
@@ -252,7 +255,7 @@ class="logo"
 
 <h1>POLICÍA NACIONAL DE COLOMBIA</h1>
 
-<h2>Sistema Institucional de Radicación JESEP - GUTAH </h2>
+<h2>Sistema Institucional de Radicación JESEP - GUTAH</h2>
 
 </div>
 
@@ -289,38 +292,38 @@ class="contenido activo"
 >
 
 <div class="grupo">
-<label>Asunto</label>
+<label>Asunto *</label>
 <input type="text" id="asunto">
 </div>
 
 <div class="grupo">
-<label>Destinatario</label>
+<label>Destinatario *</label>
 <input type="text" id="destinatario">
 </div>
 
 <div class="grupo">
-<label>Grado</label>
+<label>Grado *</label>
 <input type="text" id="grado">
 </div>
 
 <div class="grupo">
-<label>Nombre quien Radica</label>
+<label>Nombre quien Radica *</label>
 <input type="text" id="nombre">
 </div>
 
 <div class="grupo">
-<label>Teléfono</label>
+<label>Teléfono *</label>
 <input type="text" id="telefono">
 </div>
 
 <div class="grupo">
-<label>Correo</label>
+<label>Correo *</label>
 <input type="email" id="correo">
 </div>
 
 <div class="grupo">
 
-<label>Revisó y Aprobó</label>
+<label>Revisó y Aprobó *</label>
 
 <select id="reviso">
 
@@ -342,13 +345,21 @@ TE. LEON MARTINEZ KAREN NATALIA
 
 <div class="grupo">
 
-<label>Firmado jefe oficina</label>
+<label>Firmado jefe oficina *</label>
 
 <select id="firmado">
 
-<option value="SI">SI</option>
+<option value="">
+Seleccione
+</option>
 
-<option value="NO">NO</option>
+<option value="SI">
+SI
+</option>
+
+<option value="NO">
+NO
+</option>
 
 </select>
 
@@ -461,6 +472,8 @@ elemento.classList.add("activa");
 
 
 
+// ENVIAR
+
 async function enviar(){
 
 const boton =
@@ -469,37 +482,132 @@ document.getElementById("btnEnviar");
 const resultado =
 document.getElementById("resultado");
 
+const asunto =
+document.getElementById("asunto");
+
+const destinatario =
+document.getElementById("destinatario");
+
+const grado =
+document.getElementById("grado");
+
+const nombre =
+document.getElementById("nombre");
+
+const telefono =
+document.getElementById("telefono");
+
+const correo =
+document.getElementById("correo");
+
+const reviso =
+document.getElementById("reviso");
+
+const firmado =
+document.getElementById("firmado");
+
+
+// LIMPIAR BORDES
+
+[
+asunto,
+destinatario,
+grado,
+nombre,
+telefono,
+correo,
+reviso,
+firmado
+].forEach(campo=>{
+
+campo.style.border =
+"none";
+
+});
+
+
+// VALIDAR
+
+if(
+!asunto.value ||
+!destinatario.value ||
+!grado.value ||
+!nombre.value ||
+!telefono.value ||
+!correo.value ||
+!reviso.value ||
+!firmado.value
+){
+
+resultado.style.display =
+"block";
+
+resultado.className =
+"error";
+
+resultado.innerHTML =
+
+"❌ Debe diligenciar todos los campos obligatorios.";
+
+[
+asunto,
+destinatario,
+grado,
+nombre,
+telefono,
+correo,
+reviso,
+firmado
+].forEach(campo=>{
+
+if(!campo.value){
+
+campo.style.border =
+"2px solid #ef4444";
+
+}
+
+});
+
+return;
+
+}
+
+
 boton.disabled = true;
 
-boton.innerHTML = "Enviando...";
+boton.innerHTML =
+"Enviando...";
+
 
 const datos = {
 
 asunto:
-document.getElementById("asunto").value,
+asunto.value,
 
 destinatario:
-document.getElementById("destinatario").value,
+destinatario.value,
 
 grado:
-document.getElementById("grado").value,
+grado.value,
 
 nombre:
-document.getElementById("nombre").value,
+nombre.value,
 
 telefono:
-document.getElementById("telefono").value,
+telefono.value,
 
 correo:
-document.getElementById("correo").value,
+correo.value,
 
 reviso:
-document.getElementById("reviso").value,
+reviso.value,
 
 firmado:
-document.getElementById("firmado").value
+firmado.value
 
 };
+
 
 try {
 
@@ -519,11 +627,13 @@ body:JSON.stringify(datos)
 const data =
 await response.json();
 
-resultado.style.display = "block";
+resultado.style.display =
+"block";
 
 if(data.success){
 
-resultado.className = "ok";
+resultado.className =
+"ok";
 
 resultado.innerHTML =
 
@@ -535,9 +645,22 @@ data.radicado +
 
 "</strong>";
 
+
+// LIMPIAR CAMPOS
+
+asunto.value = "";
+destinatario.value = "";
+grado.value = "";
+nombre.value = "";
+telefono.value = "";
+correo.value = "";
+reviso.value = "";
+firmado.value = "";
+
 } else {
 
-resultado.className = "error";
+resultado.className =
+"error";
 
 resultado.innerHTML =
 "❌ " + data.error;
@@ -546,9 +669,8 @@ resultado.innerHTML =
 
 } catch(error){
 
-resultado.style.display = "block";
-
-resultado.className = "error";
+resultado.className =
+"error";
 
 resultado.innerHTML =
 "❌ Error de conexión.";
@@ -563,6 +685,8 @@ boton.innerHTML =
 }
 
 
+
+// CONSULTAR
 
 async function consultarRadicado(){
 
@@ -660,6 +784,8 @@ resultado.innerHTML =
 
 
 
+// QR
+
 function generarQR(){
 
 const texto =
@@ -686,3 +812,4 @@ qr.innerHTML =
 
 </body>
 </html>
+```
