@@ -1,59 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
-  <base target="_top">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Formulario de Radicación</title>
 
   <style>
 
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
     body{
-      font-family:Arial;
-      background:#f1f1f1;
-      padding:20px;
+      font-family:Arial, sans-serif;
+      background:#f1f3f4;
+      padding:30px;
     }
 
     .contenedor{
-      max-width:500px;
+      max-width:550px;
       margin:auto;
       background:white;
-      padding:25px;
-      border-radius:10px;
-      box-shadow:0 0 10px rgba(0,0,0,.1);
+      padding:30px;
+      border-radius:12px;
+      box-shadow:0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h1{
+      text-align:center;
+      margin-bottom:25px;
+      color:#1a73e8;
+    }
+
+    .grupo{
+      margin-bottom:15px;
+    }
+
+    label{
+      display:block;
+      margin-bottom:5px;
+      font-weight:bold;
+      color:#444;
     }
 
     input{
       width:100%;
       padding:12px;
-      margin-top:10px;
       border:1px solid #ccc;
-      border-radius:5px;
-      box-sizing:border-box;
+      border-radius:6px;
+      font-size:15px;
     }
 
     button{
       width:100%;
-      margin-top:15px;
       padding:14px;
-      background:#4285F4;
-      color:white;
       border:none;
-      border-radius:5px;
-      cursor:pointer;
+      border-radius:6px;
+      background:#1a73e8;
+      color:white;
       font-size:16px;
+      cursor:pointer;
+      margin-top:10px;
     }
 
     button:hover{
-      background:#3367D6;
+      background:#1558b0;
     }
 
     #resultado{
       margin-top:20px;
-      padding:15px;
-      background:#E8F0FE;
-      border-radius:5px;
-      display:none;
+      padding:20px;
+      border-radius:8px;
       text-align:center;
+      font-size:18px;
       font-weight:bold;
+      display:none;
+    }
+
+    .ok{
+      background:#e6f4ea;
+      color:#137333;
+      border:1px solid #b7dfc2;
+    }
+
+    .error{
+      background:#fce8e6;
+      color:#c5221f;
+      border:1px solid #f4b7b2;
     }
 
   </style>
@@ -64,21 +102,43 @@
 
 <div class="contenedor">
 
-  <h2>Formulario Radicación</h2>
+  <h1>Formulario de Radicación</h1>
 
-  <input type="text" id="asunto" placeholder="Asunto">
+  <div class="grupo">
+    <label>Asunto</label>
+    <input type="text" id="asunto" required>
+  </div>
 
-  <input type="text" id="destinatario" placeholder="Destinatario">
+  <div class="grupo">
+    <label>Destinatario</label>
+    <input type="text" id="destinatario" required>
+  </div>
 
-  <input type="text" id="grado" placeholder="Grado">
+  <div class="grupo">
+    <label>Grado</label>
+    <input type="text" id="grado">
+  </div>
 
-  <input type="text" id="nombre" placeholder="Nombre quien radica">
+  <div class="grupo">
+    <label>Nombres de quien Radica</label>
+    <input type="text" id="nombre" required>
+  </div>
 
-  <input type="text" id="telefono" placeholder="Número telefónico">
+  <div class="grupo">
+    <label>Número Telefónico</label>
+    <input type="text" id="telefono">
+  </div>
 
-  <input type="email" id="correo" placeholder="Correo dependencia">
+  <div class="grupo">
+    <label>Correo Dependencia</label>
+    <input type="email" id="correo">
+  </div>
 
-  <button onclick="enviar()">Enviar Información</button>
+  <button id="btnEnviar" onclick="enviar()">
+
+    Enviar Información
+
+  </button>
 
   <div id="resultado"></div>
 
@@ -86,12 +146,14 @@
 
 <script>
 
-function enviar(){
+async function enviar(){
 
-  const boton = document.querySelector("button");
+  const boton = document.getElementById("btnEnviar");
 
   boton.disabled = true;
-  boton.innerHTML = "Enviando...";
+  boton.innerHTML = "Enviando información...";
+
+  const resultadoDiv = document.getElementById("resultado");
 
   const datos = {
 
@@ -104,30 +166,71 @@ function enviar(){
 
   };
 
-  google.script.run
+  try {
 
-    .withSuccessHandler(function(respuesta){
+    // REEMPLAZA ESTA URL POR TU WEB APP DE APPS SCRIPT
+    const url =
+      "https://script.google.com/macros/s/AKfycbzRmDGn0yNkQ0hWLatvaf54ZZuJyDW6FycJpmZlonlhSRmhtUlh9WNqReTtD2lOJb1ikw/exec";
 
-      document.getElementById("resultado").style.display = "block";
+    const respuesta = await fetch(url, {
 
-      document.getElementById("resultado").innerHTML =
-        "Resultado columna C:<br><br>" + respuesta;
+      method: "POST",
 
-      boton.disabled = false;
-      boton.innerHTML = "Enviar Información";
+      headers: {
+        "Content-Type": "application/json"
+      },
 
-    })
+      body: JSON.stringify(datos)
 
-    .withFailureHandler(function(error){
+    });
 
-      alert("Error: " + error.message);
+    const resultado = await respuesta.json();
 
-      boton.disabled = false;
-      boton.innerHTML = "Enviar Información";
+    resultadoDiv.style.display = "block";
 
-    })
+    if(resultado.resultado){
 
-    .guardarDatos(datos);
+      resultadoDiv.className = "ok";
+
+      resultadoDiv.innerHTML = `
+        Información enviada correctamente<br><br>
+        <strong>Radicado generado:</strong><br>
+        ${resultado.resultado}
+      `;
+
+      // LIMPIAR FORMULARIO
+
+      document.getElementById("asunto").value = "";
+      document.getElementById("destinatario").value = "";
+      document.getElementById("grado").value = "";
+      document.getElementById("nombre").value = "";
+      document.getElementById("telefono").value = "";
+      document.getElementById("correo").value = "";
+
+    } else {
+
+      resultadoDiv.className = "error";
+
+      resultadoDiv.innerHTML =
+        "Error:<br><br>" + resultado.error;
+
+    }
+
+  } catch(error){
+
+    resultadoDiv.style.display = "block";
+
+    resultadoDiv.className = "error";
+
+    resultadoDiv.innerHTML =
+      "Error de conexión con Apps Script";
+
+    console.error(error);
+
+  }
+
+  boton.disabled = false;
+  boton.innerHTML = "Enviar Información";
 
 }
 
