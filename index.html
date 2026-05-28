@@ -44,7 +44,7 @@ body{
 
   margin:auto;
 
-  background:rgba(0,0,0,.78);
+  background:rgba(0,0,0,.80);
 
   border-radius:15px;
 
@@ -94,7 +94,6 @@ body{
   display:flex;
 
   background:#14213d;
-
 }
 
 .tab{
@@ -154,7 +153,8 @@ label{
   color:#d4af37;
 }
 
-input{
+input,
+select{
 
   width:100%;
 
@@ -238,12 +238,10 @@ button:hover{
 @media(max-width:700px){
 
   .tabs{
-
     flex-direction:column;
   }
 
   .header h1{
-
     font-size:24px;
   }
 
@@ -260,8 +258,8 @@ button:hover{
 <div class="header">
 
 <img
-  src="https://upload.wikimedia.org/wikipedia/commons/7/70/Emblem_of_the_National_Police_of_Colombia.svg"
-  class="logo"
+src="https://upload.wikimedia.org/wikipedia/commons/7/70/Emblem_of_the_National_Police_of_Colombia.svg"
+class="logo"
 >
 
 <h1>POLICÍA NACIONAL DE COLOMBIA</h1>
@@ -330,6 +328,73 @@ Módulo de Radicación
 <input type="email" id="correo">
 </div>
 
+<!-- NUEVO -->
+
+<div class="grupo">
+
+<label>Revisó y Aprobó</label>
+
+<select id="reviso">
+
+<option value="">
+Seleccione una opción
+</option>
+
+<option value="MY. TIQUE BONILLA EMMA PAOLA">
+MY. TIQUE BONILLA EMMA PAOLA
+</option>
+
+<option value="TE. LEON MARTINEZ KAREN NATALIA">
+TE. LEON MARTINEZ KAREN NATALIA
+</option>
+
+</select>
+
+</div>
+
+<div class="grupo">
+
+<label>
+Firmado por el jefe de Oficina
+</label>
+
+<div style="
+display:flex;
+gap:30px;
+margin-top:10px;
+">
+
+<label style="color:white;">
+
+<input
+type="radio"
+name="firmado"
+value="SI"
+checked
+style="width:auto;"
+>
+
+SI
+
+</label>
+
+<label style="color:white;">
+
+<input
+type="radio"
+name="firmado"
+value="NO"
+style="width:auto;"
+>
+
+NO
+
+</label>
+
+</div>
+
+</div>
+
 <button onclick="enviar()" id="btnEnviar">
 
 Enviar Información
@@ -340,7 +405,7 @@ Enviar Información
 
 </div>
 
-<!-- MODULO 2 -->
+<!-- MODULO CONSULTA -->
 
 <div id="consulta"
 class="contenido">
@@ -354,9 +419,9 @@ Consulta de Radicados
 <label>Número de Radicado</label>
 
 <input
-  type="text"
-  id="radicadoBuscar"
-  placeholder="Ej: RAD-00001"
+type="text"
+id="radicadoBuscar"
+placeholder="Ej: RAD-00001"
 >
 
 </div>
@@ -371,7 +436,7 @@ Consultar Radicado
 
 </div>
 
-<!-- MODULO 3 -->
+<!-- MODULO QR -->
 
 <div id="qr"
 class="contenido">
@@ -385,9 +450,9 @@ Generador Código QR
 <label>Ingrese Radicado</label>
 
 <input
-  type="text"
-  id="textoQR"
-  placeholder="RAD-00001"
+type="text"
+id="textoQR"
+placeholder="RAD-00001"
 >
 
 </div>
@@ -460,7 +525,15 @@ async function enviar(){
       document.getElementById("telefono").value,
 
     correo:
-      document.getElementById("correo").value
+      document.getElementById("correo").value,
+
+    reviso:
+      document.getElementById("reviso").value,
+
+    firmado:
+      document.querySelector(
+        'input[name="firmado"]:checked'
+      ).value
 
   };
 
@@ -538,8 +611,7 @@ function consultarRadicado(){
   resultado.innerHTML =
     "Consulta solicitada para:<br><strong>" +
     radicado +
-    "</strong><br><br>" +
-    "Módulo listo para conectar con Apps Script.";
+    "</strong>";
 
 }
 
